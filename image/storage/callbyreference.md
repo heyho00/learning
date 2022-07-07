@@ -8,6 +8,10 @@ Call by value(값에 의한 호출), Call by reference(참조에 의한 호출)
 
 언뜻 보면 이해가 쉬울 수 있지만, 오히려 헷갈릴 수가 있다. 이는 프로그래밍적으로 직접 접근해서 알아보는 것이 가장 확실하다.
 
+Call by Reference : 데이터의 시작주소를 전달하여 데이터를 연산하도록 지시함
+
+Call by Value : 데이터의 값을 전달하여 데이터를 연산하도록 지시함
+
 <br><br>
 
 ## parameter vs arguments
