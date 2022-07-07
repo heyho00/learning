@@ -77,7 +77,7 @@ myCat.setName("arthur");
 myCat.getName(); //arthur
 ```
 
-**Exception -1**
+**Exception**
 
 ```jsx
 const createArr = function (arg) {
