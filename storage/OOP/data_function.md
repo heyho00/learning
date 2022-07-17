@@ -22,7 +22,7 @@ let {변수명} = {초기값} → reference를 변경할 수 있는 데이터
   → Array는 C, C++ 등에서 쓰이는 데이터의 시작점과 크기가 정해져있다
   → List는 데이터의 시작점은 정해져있지만, 크기와 다음 데이터의 위치가 정해져 있지 않다.
 
-<img src="../image/list.png" width="500" />
+<img src="../../image/list.png" width="500" />
 
 <br><br>
 

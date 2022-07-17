@@ -93,16 +93,16 @@ console.log(a); // {}
 
 JS에서는 무조건 call by value로 작동하기 때문이다.
 
-<img src="../image/reference.png" width="400" />
+<img src="../../image/reference.png" width="400" />
 
 변수 a에 담기는 것은 객체 {}가 담겨있는 메모리 주소 0x12이다. (원시값이 아닌 참조 타입이기 때문에)
 
-<img src="../image/reference2.png" width="400" />
+<img src="../../image/reference2.png" width="400" />
 
 a에 대한 참조값을 복사한 value(b)가 새로 생성된다.
 아직까지는 이 참조된 값이 {} 객체를 가리키고 있다.
 
-<img src="../image/reference3.png" width="400"/>
+<img src="../../image/reference3.png" width="400"/>
 
 = 연산자로 참조값을 재할당하기 때문에 기존에 참조하던 {}에서 1로 참조 대상이 변경되었다.
 
