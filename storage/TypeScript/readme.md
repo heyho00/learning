@@ -28,7 +28,7 @@ type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
 
 ## Readonly
 
-T의 모든 프로퍼티를 읽기 전용(재할당 불가)으로 바꾸는 내장 제네릭 Readonly<T>를 이를 사용하지 않고 구현하세요.
+T의 모든 프로퍼티를 읽기 전용(재할당 불가)으로 바꾸는 내장 제네릭 `Readonly<T>`를 이를 사용하지 않고 구현하세요.
 
 ```ts
 // 예시
@@ -73,7 +73,7 @@ type TupleToObject<T extends readonly PropertyKey[]> = {
 
 ## First of Array
 
-배열(튜플) T를 받아 첫 원소의 타입을 반환하는 제네릭 First<T>를 구현하세요.
+배열(튜플) T를 받아 첫 원소의 타입을 반환하는 제네릭 `First<T>`를 구현하세요.
 
 ```ts
 //예시
@@ -94,7 +94,7 @@ type First<T extends any[]> = T extends [infer P, ...any] ? P : never;
 
 ## Length of Tuple
 
-배열(튜플)을 받아 길이를 반환하는 제네릭 Length<T>를 구현하세요.
+배열(튜플)을 받아 길이를 반환하는 제네릭 `Length<T>`를 구현하세요.
 
 ```ts
 // 예시
@@ -110,4 +110,20 @@ type Length<T extends Readonly<any[]>> = T['length']
 tuple 타입을 선언할 때 각 요소 자리에 다른 타입이 들어갈 수 없으므로 readonly를 수식해준다.
 배열이 들어와야 하므로, extends any[] 로 타입을 제한해준다.
 T['length'] 로 타입의 길이를 가져올 수 있다.
+```
+
+## Exclude
+
+T에서 U에 할당할 수 있는 타입을 제외하는 내장 제네릭 `Exclude<T, U>`를 이를 사용하지 않고 구현하세요.
+
+```ts
+// 예시
+type Result = MyExclude<'a' | 'b' | 'c', 'a'> // 'b' | 'c'
+
+// 답
+type MyExclude<T, U> = T extends U ? never : T;
+
+`T extends U`는 union으로 들어온 T 타입 (ex: "a" | "b" | "c")을 하나씩 체크.
+U와 타입이 같으면 never, 아무것도 없는 타입이기 때문에 아무것도 남지 않는다.
+U와 타입이 다르면 T 자신을 보낸다.
 ```

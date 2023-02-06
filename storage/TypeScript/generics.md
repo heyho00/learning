@@ -14,7 +14,7 @@ const add: Add = (a, b) => a + b;
 
 ## Polymorphism
 
-#### Generic
+### Generic
 
 generic이란 타입의 placeholder 같은것.
 
