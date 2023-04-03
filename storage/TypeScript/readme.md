@@ -127,3 +127,31 @@ type MyExclude<T, U> = T extends U ? never : T;
 U와 타입이 같으면 never, 아무것도 없는 타입이기 때문에 아무것도 남지 않는다.
 U와 타입이 다르면 T 자신을 보낸다.
 ```
+
+## Awaited
+
+Promise와 같은 타입에 감싸인 타입이 있을 때, 안에 감싸인 타입이 무엇인지 어떻게 알 수 있을까요?
+
+예를들어 Promise`<ExampleType>`이 있을 때, ExampleType을 어떻게 얻을 수 있을까요?
+
+```js
+type ExampleType = Promise<string>
+
+type Result = MyAwaited<ExampleType> // string
+```
+
+```ts
+type MyAwaited<T extends PromiseLike<any>> = T extends PromiseLike<infer P>
+? P extends PromiseLike<any>
+  ? MyAwaited<P>
+  : P
+:T;
+```
+
+```ts
+type MyAwaited<T extends PromiseLike<any>> = 
+  T extends PromiseLike<infer PromiseType>
+    ? Awaited<PromiseType> 
+    : T
+  ;
+```
