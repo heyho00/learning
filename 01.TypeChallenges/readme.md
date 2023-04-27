@@ -152,3 +152,72 @@ type MyAwaited<T extends PromiseLike<any>> = T extends PromiseLike<
   ? Awaited<PromiseType>
   : T;
 ```
+
+## If
+
+조건 C가 참일 때 반환하는 타입 T, 거짓일 때 반환하는 타입 F를 받는 타입 If를 구현하세요.
+
+C는 true 또는 false이고, T와 F는 아무 타입입니다. (3항 연산자임)
+
+예시 :
+
+```js
+// 예시
+type A = If<true, "a", "b">; // expected to be 'a'
+type B = If<false, "a", "b">; // expected to be 'b'
+```
+
+```js
+// 답
+type If<C extends boolean, T, F> = C extends true ? T : F;
+```
+
+## concat
+
+JavaScript의 Array.concat 함수를 타입 시스템에서 구현하세요.
+
+타입은 두 인수를 받고, 인수를 왼쪽부터 concat한 새로운 배열을 반환해야 합니다.
+
+예시 :
+
+```js
+type Result = Concat<[1], [2]>; // expected to be [1, 2]
+```
+
+오답 :
+
+```js
+type Concat<T, U> = [...T, ...U]
+```
+
+답 :
+
+```js
+type Tuple = readonly unknown[];
+
+type Concat<T extends Tuple, U extends Tuple> = [...T, ...U];
+```
+
+```js
+type Concat<T extends any[], U extends any[]> = [...T, ...U]
+```
+
+`<T extends any[], U extends any[]>` 이렇게 해주는 이유는 ...연산자가 런타임에서 동작하는 기능이기 때문이다. 타입 레벨에서 spread 연산자를 사용할 수 없다. !
+
+spread 연산자가 코드가 실행될 때 동적으로 동작하는 것을 의미한다.
+
+배열, 객체 또는 함수 호출의 인수 리스트를 확장하거나, 배열 또는 객체를 병합하는 등의
+
+동작을 수행할 때 사용된다.
+
+반면 타입스크립트의 타입 시스템은 컴파일 타임에 작동하며, 타입정보를 검사하고 추론한다.
+
+그래서 spread 연산자를 직접 타입 레벨에서 사용할 수 없는 것이다.
+
+**대신에 Tuple을 이용한다.**
+
+`Tuple`은 배열과 유사하지만, 배열과는 달리 각 요소의 타입이 다를 수 있다.
+
+그래서 `<T extends any[], U extends any[]>` 이렇게 제네릭 타입 매개변수
+
+T, U가 모두 배열 타입인지 확인하고 Concat 타입이 배열 타입에만 적용될 수 있도록 제한한다.
