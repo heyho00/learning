@@ -221,3 +221,20 @@ spread 연산자가 코드가 실행될 때 동적으로 동작하는 것을 의
 그래서 `<T extends any[], U extends any[]>` 이렇게 제네릭 타입 매개변수
 
 T, U가 모두 배열 타입인지 확인하고 Concat 타입이 배열 타입에만 적용될 수 있도록 제한한다.
+
+## Push
+
+`Array.push`의 제네릭 버전을 구현하세요.
+
+예시 :
+
+```js
+type Result = Push<[1, 2], "3">; // [1, 2, '3']
+```
+
+답 :
+
+```js
+type Tuple = readonly unknown[]
+type Push<T extends Tuple, U> = [...T, U]
+```
