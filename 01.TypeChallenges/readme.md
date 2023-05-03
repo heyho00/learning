@@ -238,3 +238,37 @@ type Result = Push<[1, 2], "3">; // [1, 2, '3']
 type Tuple = readonly unknown[]
 type Push<T extends Tuple, U> = [...T, U]
 ```
+
+## Unshift
+
+`Array.unshift`의 타입 버전을 구현하세요.
+
+예시 :
+
+```js
+type Result = Unshift<[1, 2], 0>; // [0, 1, 2,]
+```
+
+답 :
+
+```js
+type Unshift<T extends unknown[], U> = [U, ...T]
+```
+
+## Parameters
+
+내장 제네릭 `Parameters<T>`를 이를 사용하지 않고 구현하세요.
+
+예시 :
+
+```js
+const foo = (arg1: string, arg2: number): void => {};
+
+type FunctionParamsType = MyParameters<typeof foo>; // [arg1: string, arg2: number]
+```
+
+답 :
+
+```js
+type MyParameters<T extends (...args: any[]) => any> = T extends (...any: infer S) => any ? S : any
+```
