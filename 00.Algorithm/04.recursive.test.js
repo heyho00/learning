@@ -70,6 +70,9 @@ describe('이진수 출력', ()=>{
 
 
 
+
+
+
 // 이진트리 순회(깊이우선탐색)
 
 // 전위순회와 후위순회를 연습해보자.
@@ -83,8 +86,83 @@ describe('이진수 출력', ()=>{
 // 후위순회 출력 : 4 5 2 6 7 3 1
 
 // 우선 1을 부모로보고 2, 3이 자식이라면
-// 왼쪽자식은 부모 * 2 오른쪽 자식은 부모 * 2 + 1 의 개념.
+// 왼쪽자식은 부모 * 2 오른쪽 자식은 부모 * 2 + 1 의 개념. -> 전위순회
 
-function binaryTree () {
-    return '다음에 하자 일단 저장'
+// 왼 부 오 -> 중위 순회
+// 왼 오 부 -> 후위 순회
+
+function binaryTree (v) {
+    let answer = []
+
+    function DFS(v) {
+        if(v>7){
+            return
+        } else {
+            answer = [...answer, v] //전위순회
+            DFS(v*2)
+            DFS(v*2+1)
+        }
+    }
+    DFS(v)
+    return answer
 }
+
+describe('이진트리 순회', () => {
+    test('전위 순회', () => {
+        expect(binaryTree(1)).toStrictEqual([1,2,4,5,3,6,7])
+        // toBe는 객체의 메모리 주소를 확인한다함. 값이 같아도 다르다고 나옴.
+        // toEqual, toStrictEqual은 값을 비교.
+    })
+})
+
+
+function binaryTree2 (v) {
+    let answer = []
+
+    function DFS(v) {
+        if(v>7){
+            return
+        } else {
+            DFS(v*2)
+            answer = [...answer, v] //중위순회
+            DFS(v*2+1)
+        }
+    }
+    DFS(v)
+    return answer
+}
+
+
+describe('이진트리 순회', () => {
+    test('중위 순회', () => {
+        expect(binaryTree2(1)).toStrictEqual([4,2,5,1,6,3,7])
+        // toBe는 객체의 메모리 주소를 확인한다함. 값이 같아도 다르다고 나옴.
+        // toEqual, toStrictEqual은 값을 비교.
+    })
+})
+
+
+function binaryTree3 (v) {
+    let answer = []
+
+    function DFS(v) {
+        if(v>7){
+            return
+        } else {
+            DFS(v*2)
+            DFS(v*2+1)
+            answer = [...answer, v] // 후위순회
+        }
+    }
+    DFS(v)
+    return answer
+}
+
+
+describe('이진트리 순회', () => {
+    test('후위 순회', () => {
+        expect(binaryTree3(1)).toStrictEqual([4,5,2,6,7,3,1])
+        // toBe는 객체의 메모리 주소를 확인한다함. 값이 같아도 다르다고 나옴.
+        // toEqual, toStrictEqual은 값을 비교.
+    })
+})
